@@ -1,0 +1,85 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require bootstrap/dist/css/bootstrap
+ *= require_self
+ */
+
+.ng-cloak{
+  display:none;
+}
+h2,p{
+  margin:0;
+}
+h2{
+  margin:0;
+  padding:5px 0;
+  color:#333;
+  width:100%;
+}
+.gameinfo{
+  color:#333;
+  font-weight:bold;
+}
+.board{
+  float:left;
+  color:#333;
+  font-weight:bold;
+}
+.square{
+    background-color: #333;
+    border: 1px solid #fff;
+    color: #fff;
+    cursor: pointer;
+    float: left;
+    font-size: 52px;
+    font-weight: bold;
+    height: 33px;
+    line-height: 30px;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    width: 35px;
+}
+.square.floatme{
+  clear:both;
+}
+
+button{
+  color:#333;
+  font-weight:bold;
+  text-transform:uppercase;
+  border:2px solid #333;
+  padding:5px;
+  margin:5px 0;
+  cursor:pointer;
+  background-color:#fff
+}
+input{
+  width:30px;
+}
+
+.won{
+  color:red;
+}
+
+* {
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+}
+*:before,
+*:after {
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+}

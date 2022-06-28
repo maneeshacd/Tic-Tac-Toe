@@ -1,0 +1,34 @@
+.ng-cloak{"ng-app": "ticTacToeApp", "ng-cloak": ""}
+  %div{"ng-controller": "TicTacToeCtrl"}
+    %nav.navbar.navbar-light.bg-secondary
+      .container-fluid
+        .text-center.text-white.fs-2 Tic Tac Toe
+        .text-center.text-white.float-end{'ng-show': 'CountDown'} {{CountDown}} Seconds
+    .text-center
+      %button.btn.btn-success.mt-3{'ng-click': 'newGame()'} NEW GAME
+    .text-center{'ng-show': 'timeout'}
+      %h4.mt-3 Timeout! Start New Game
+    .mt-3.row.text-center{'ng-show': 'gameStarted && active_players.length == 0'}
+      %label.col-sm-2.col-form-label Enter Name of Player 1 (X) :
+      %form.d-flex{name: 'player1Form', 'ng-submit': "createPlayer(player1_name, 'X')"}
+        .col-sm-3
+          %input.form-control{'ng-model': 'player1_name', required: "true"}
+        .col-sm-1.ms-5
+          %button.btn.btn-sm.btn-secondary Submit
+    .mt-3.row.text-center{'ng-show': '!timeout && active_players.length == 1'}
+      %label.col-sm-2.col-form-label{:for => "inputPassword"} Enter Name of Player 2 (O):
+      %form.d-flex{'ng-submit': "createPlayer(player2_name, 'O')"}
+        .col-sm-3
+          %input.form-control{'ng-model': 'player2_name', required: "true"}
+        .col-sm-1.ms-5
+          %button.btn.btn-sm.btn-secondary Submit
+    .board.ms-3{'ng-show': 'active_players.length == 2'}
+      %p.pb-1{"ng-show": "!winner && !draw"} {{currentPlayer.name}}'s Turn
+      %p.won.pb-1{"ng-show": "winner"} {{currentPlayer.name}} WON
+      %p.pb-1{"ng-show": "draw"} DRAW
+      .square{"ng-class": "{'floatme': !($index % 3)}", "ng-click": "playTurn($event, positionInfo)", "ng-repeat": "positionInfo in board"}
+        {{positionInfo.player}}
+
+
+
+
