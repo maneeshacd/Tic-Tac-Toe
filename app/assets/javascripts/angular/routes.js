@@ -1,5 +1,6 @@
 app.factory('Game', ['$resource', function($resource) {
   return $resource('/api/games', null, {
+    'query':  { method: 'GET', isArray: false },
     'create': { method: 'POST' },
     'update': { url: '/api/games/:id', method: 'PATCH', params: {id: '@id'} }
   });
@@ -10,12 +11,6 @@ app.factory('GamePlayer', ['$resource', function($resource) {
     'all': { method: 'GET', isArray: false },
     'save': { method: 'POST'},
     'movement': { method: 'POST', url: '/api/game_players/:id/movement' },
-  });
-}]);
-
-app.factory('Players', ['$resource', function($resource) {
-  return $resource('/api/players', null, {
-    'query':  {method: 'GET', isArray: false}
   });
 }]);
 

@@ -13,7 +13,7 @@ class FindWinnerService
 
   def winner
     @game_player.moves.push(@position_info_params)
-    @game_player.save
+    @game_player.save!
     return if @game_player.moves.count < 3
 
     diagonal_down_count = 0
@@ -36,7 +36,7 @@ class FindWinnerService
         end
       end
     end
-    @game_player.save
+    @game_player.save!
     @winner
   end
 end

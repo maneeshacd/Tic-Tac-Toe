@@ -1,22 +1,17 @@
 
 module Api
   class GamesController < ApplicationController
+
+    def index
+      @games = Game.includes(game_players: :player)
+    end
+
     def create
       @game = Game.create()
-      if @game.persisted?
-        render_success_json(@game)
-      else
-        render_error_state(@game.errors, :bad_request)
-      end
     end
 
     def update
       @game = Game.find_by(id: game_params[:id])
-      if @game.update(game_params)
-        render_success_json(@game)
-      else
-        render_error_state(@game.errors, :bad_request)
-      end
     end
 
     private

@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def render_error_state(err_msg, status)
-    render json: { error: err_msg }, status: status
+    render json: { success: false, error: err_msg }, status: status
   end
 
   def render_success_json(data, status = :ok)

@@ -72,6 +72,10 @@ input{
   color:red;
 }
 
+.table {
+  margin: auto;
+}
+
 * {
   -webkit-box-sizing: content-box;
      -moz-box-sizing: content-box;

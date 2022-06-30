@@ -1,33 +1,67 @@
 .ng-cloak{"ng-app": "ticTacToeApp", "ng-cloak": ""}
   %div{"ng-controller": "TicTacToeCtrl"}
-    %nav.navbar.navbar-light.bg-secondary
-      .container-fluid
-        .text-center.text-white.fs-2 Tic Tac Toe
-        .text-center.text-white.float-end{'ng-show': 'CountDown'} {{CountDown}} Seconds
+
+    %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      .container-fluid.ms-3
+        %a.navbar-brand{:href => "/"} Tic Tac Toe
+        %button.navbar-toggler{"aria-controls" => "navbarNav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarNav", "data-bs-toggle" => "collapse", :type => "button"}
+          %span.navbar-toggler-icon
+        #navbarNav.collapse.navbar-collapse
+          %ul.navbar-nav
+            %li.nav-item
+              %a.nav-link.active{'ng-click': 'fetchHistory()', "aria-current" => "page", :href => "#"} History
+
+    .alert.alert-danger{:role => "alert", 'ng-show': 'errors'}
+      {{errors}}
+
     .text-center
-      %button.btn.btn-success.mt-3{'ng-click': 'newGame()'} NEW GAME
+      %button.btn.btn-success.mt-3{'ng-hide': 'gameStarted', 'ng-click': 'newGame()'} NEW GAME
     .text-center{'ng-show': 'timeout'}
       %h4.mt-3 Timeout! Start New Game
-    .mt-3.row.text-center{'ng-show': 'gameStarted && active_players.length == 0'}
+    .mt-3.row.text-center.ms-3{'ng-show': 'gameStarted && active_players.length == 0'}
       %label.col-sm-2.col-form-label Enter Name of Player 1 (X) :
       %form.d-flex{name: 'player1Form', 'ng-submit': "createPlayer(player1_name, 'X')"}
         .col-sm-3
           %input.form-control{'ng-model': 'player1_name', required: "true"}
         .col-sm-1.ms-5
           %button.btn.btn-sm.btn-secondary Submit
-    .mt-3.row.text-center{'ng-show': '!timeout && active_players.length == 1'}
+    %div{'ng-show': 'active_players.length != 0 && !timeout'}
+      .mt-3.row.text-center.ms-3{'ng-show': 'active_players.length > 0'}
+        %span Player 1 : {{active_players[0].name}}
+      .mt-3.row.text-center.ms-3{'ng-show': 'active_players.length == 1'}
+        %span Waiting for second player ... {{CountDown}} Seconds
+      .mt-3.row.text-center.ms-3{'ng-show': 'active_players.length == 2'}
+        %span Player 2 : {{active_players[1].name}}
+    .mt-3.row.text-center.ms-3{'ng-show': '!timeout && active_players.length == 1'}
       %label.col-sm-2.col-form-label{:for => "inputPassword"} Enter Name of Player 2 (O):
       %form.d-flex{'ng-submit': "createPlayer(player2_name, 'O')"}
         .col-sm-3
           %input.form-control{'ng-model': 'player2_name', required: "true"}
         .col-sm-1.ms-5
           %button.btn.btn-sm.btn-secondary Submit
-    .board.ms-3{'ng-show': 'active_players.length == 2'}
+    .board.ms-4.mt-3{'ng-show': 'active_players.length == 2'}
       %p.pb-1{"ng-show": "!winner && !draw"} {{currentPlayer.name}}'s Turn
       %p.won.pb-1{"ng-show": "winner"} {{currentPlayer.name}} WON
       %p.pb-1{"ng-show": "draw"} DRAW
       .square{"ng-class": "{'floatme': !($index % 3)}", "ng-click": "playTurn($event, positionInfo)", "ng-repeat": "positionInfo in board"}
         {{positionInfo.player}}
+
+    .text-center{'ng-show': 'history'}
+      %table.table.table-dark.table-striped.w-50.mt-3
+        %thead
+          %tr
+            %th{:scope => "col"} Players
+            %th{:scope => "col"} Winner
+        %tbody
+          %tr{'ng-repeat': 'game in games', 'ng-if': 'game.game_players'}
+            %td
+              {{playerNames(game.game_players)}}
+            %td
+              %span{'ng-if': 'findWinner(game.game_players)'}
+                {{findWinner(game.game_players).name}}
+              %span{'ng-if': '!findWinner(game.game_players)'}
+                %span.badge.rounded-pill.bg-info.text-dark.ms-2 DRAW
+
 
 
 
