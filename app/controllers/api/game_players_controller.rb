@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Api
   class GamePlayersController < ApplicationController
@@ -11,9 +12,11 @@ module Api
 
     def movement
       @game_player = GamePlayer.find(params[:id])
-      @winner = FindWinnerService.new(
-        game_player: @game_player, position_info_params: position_info_params
+      @winner = WinnerService.new(
+        @game_player, position_info_params
       ).call
+      @player_moves =
+        GamePlayer.list(@game_player.game).pluck(:moves).flatten.count
     rescue ActiveRecord::ActiveRecordError => e
       render_error_state(e, :bad_request)
     end

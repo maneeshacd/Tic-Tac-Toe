@@ -1,7 +1,7 @@
-class FindWinnerService
-  def initialize(params)
-    @game_player = params[:game_player]
-    @position_info_params = params[:position_info_params]
+class WinnerService
+  def initialize(game_player, position_info_params)
+    @game_player = game_player
+    @position_info_params = position_info_params
     @winner = nil
   end
 
@@ -27,9 +27,7 @@ class FindWinnerService
         diagonal_up_count += 1 if move['row'] == diagonal_up_index && move['col'] == i
         row_count += 1 if move['row'] == i
         col_count += 1 if move['col'] == i
-                  # binding.pry
         if diagonal_up_count == 3 || diagonal_down_count == 3 || col_count == 3 || row_count == 3
-          # binding.pry
           player = @game_player.player
           @winner = player
           @game_player.winner = true

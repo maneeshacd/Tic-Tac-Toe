@@ -118,6 +118,10 @@ app.controller('TicTacToeCtrl', ['$scope', 'GamePlayer', 'Game', 'GameDataServic
     }, 1000, 0);
   };
 
+  $scope.back = function() {
+    $scope.history = false
+  }
+
   initData()
 }]);
 

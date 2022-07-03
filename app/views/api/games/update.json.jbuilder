@@ -1,4 +1,4 @@
-if @game.update(game_params)
+if @updated
   json.game     @game
   json.success  true
 else
