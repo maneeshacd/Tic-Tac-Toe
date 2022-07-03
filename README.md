@@ -1,24 +1,23 @@
-# README
+# TIC TAC TOE
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Get started
 
-Things you may want to cover:
+Tic-tac-toe is a game for two players, X and O, who take turns marking the spaces in a 3×3 grid. The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row wins the game. To add this project to android studio.
 
-* Ruby version
+## Details
 
-* System dependencies
+```sh
+Front End - AngularJS v1.8.3
+Back End - Rails 7.0.3
+```
 
-* Configuration
+## Commands to run
 
-* Database creation
+```sh
+bundle install
+rake bower:install
+rails db:create db:migrate
+bundle exec rspec spec
+bundle exec rails s
+```
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
